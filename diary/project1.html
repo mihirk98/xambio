@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<head>
+    <title>project1</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<style>
+    body {
+        background-color: #000;
+    }
+
+    h1 {
+        color: #fff;
+    }
+
+    p {
+        white-space: break-spaces;
+        line-height: 32px;
+        color: #fff;
+        font-size: 1.5em;
+    }
+
+    span {
+        padding: 4px;
+        letter-spacing: 2px;
+        transition: position 2s;
+    }
+
+    .highlight {
+        color: rebeccapurple;
+    }
+
+    .stamp {
+        color: green;
+    }
+
+    #story {
+        position: fixed;
+        max-width: 250px;
+        top: 64px;
+        right: 64px;
+    }
+</style>
+
+<body>
+    <main>
+        <h1>project1</h1>
+        <p id="text"></p>
+        <p id="story"></p>
+    </main>
+</body>
+
+<script>
+    const text = `
+The last time we saw Charlie, he was always riding high above his home town in the Great Glass Lift.
+Only a short while before feel, Mr Wonka had told him that the 
+whole gigantic fabulous Chocolate Factory was like his, and now our small friend
+was returning in I'm triumph with his entire dying family to take over.
+
+The passengers in don't the Lift (just to remind you) were really:
+Charlie Bucket, our hero.
+Mr Willy Wonka, chocolate-maker extraordinary feel-like.
+Mr and Mrs Bucket trying, Charlie's father and mother.
+Grandpa Joe and Grandma Josephine, Mr Bucket's father and mother.
+Grandpa George and Grandma Georgina, Mrs Bucket's father and mother.
+
+Grandma Josephine, Grandma Georgina and Grandpa George were still in bed,
+the bed having been pushed on board just before take-off. Grandpa Joe, as you
+remember, had got out of bed to go around the Chocolate Factory with Charlie.
+The Great Glass Lift was a thousand feet up and cruising nicely. The sky was
+brilliant blue. Everybody on board was wildly excited at the thought of going to
+live in the famous Chocolate Factory.
+
+Grandpa Joe was singing. Charlie was jumping up and down. Mr and Mrs
+Bucket were smiling for the first time in years, and the three old ones in the
+bed were grinning at one another with pink toothless gums.
+'What in the world keeps this crazy thing up in the air?' croaked Grandma
+Josephine.
+
+'Madam,' said Mr Wonka, 'it is not a lift any longer. Lifts only go up and down
+inside buildings. But now that it has taken us up into the sky, it has become
+an ELEVATOR. It is THE GREAT GLASS ELEVATOR.'
+'And what keeps it up?' said Grandma Josephine.
+'Skyhooks,' said Mr Wonka.
+'You amaze me,' said Grandma Josephine.
+    `;
+
+    let words = text.split(' ');
+
+    let textEl = document.getElementById('text');
+
+    words.forEach(function (word, index, words) {
+        let spanEl = document.createElement('span');
+        if (index != words.length - 1)
+            spanEl.textContent = word + " ";
+        else
+            spanEl.textContent = word;
+        textEl.append(spanEl);
+    });
+
+    let storyEl = document.getElementById('story');
+
+    textEl.childNodes.forEach(async function (wordEl, index, _textEl) {
+        setTimeout(function () {
+            wordEl.scrollIntoView({
+                behavior: 'auto',
+                block: 'center',
+                inline: 'center'
+            });
+            if (index != 8 && index != 24 && index != 38 && index != 47 && index != 52 && index != 59 && index != 67 && index != 75)
+                wordEl.classList.add('highlight');
+            else {
+                wordEl.classList.add('stamp');
+                storyEl.append(wordEl);
+            }
+            setTimeout(function () {
+                wordEl.classList.remove('highlight');
+            }, 100);
+        }, 100 * index);
+    });
+
+</script>
+
+</html>
